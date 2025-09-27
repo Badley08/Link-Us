@@ -50,6 +50,8 @@ def on_disconnect():
     del connected_users[request.sid]
     emit("connected users", connected_users, broadcast=True, to=room)
 
+import os
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, use_reloader=True)
+    port = int(os.environ.get("PORT", 8000))  # récupère le port assigné par Koyeb
+    socketio.run(app, host="0.0.0.0", port=port)
